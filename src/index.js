@@ -1,13 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Mizgog } from "./Mizgog";
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom"
+import { Mizgog } from "./components/Mizgog";
+import "./components/Mizgog.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Mizgog />
+    <Router>
+      <Mizgog />
+    </Router>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

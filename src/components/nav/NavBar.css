@@ -1,0 +1,28 @@
+.navbar {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding-left: 0;
+    align-items: center;    
+}
+.navbar__item {
+    flex-basis: 20%;
+    list-style-type: none;
+    text-align: center;
+}
+.homeLink {
+    background-image: url("/home/dakotalambert/workspace/mizgog/src/Images/weezard.png");
+}
+.wizardButton {
+    max-height: 6rem;
+}
+.bookButton {
+    max-height: 6rem;
+}
+.createButton {
+    max-height: 6.5rem;
+}
+.logoutButton {
+    max-height: 5rem;
+}
+
