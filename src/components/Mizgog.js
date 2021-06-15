@@ -1,18 +1,33 @@
 import React from "react";
 import { NavBar } from "./nav/NavBar";
 import { ApplicationViews } from "./ApplicationViews";
-// import { Route, Redirect } from "react-router-dom";
-// import { ApplicationViews } from "./ApplicationViews";
-// import { Login } from "./auth/Login";
-// import { Register } from "./auth/Register";
-import "./Mizgog.css"
+import { Route, Redirect } from "react-router-dom";
+import { Login } from "./auth/Login";
+import { Register } from "./auth/Register";
+import "./Mizgog.css";
 
 export const Mizgog = () => (
   <>
-  <NavBar />
-    <div>
-      <h1 className="mizgogPageHeader">Mizgogs M'accoutrements</h1>
-    </div>
-    <ApplicationViews />
+    <Route
+      render={() => {
+        if (localStorage.getItem("wizard")) {
+          return (
+            <>
+              <NavBar />
+              <ApplicationViews />
+            </>
+          );
+        } else {
+          return <Redirect to="/login" />;
+        }
+      }}
+    />
+
+    <Route exact path="/login">
+      <Login />
+    </Route>
+    <Route exact path="/register">
+      <Register />
+    </Route>
   </>
-)
+);

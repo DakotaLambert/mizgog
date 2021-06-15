@@ -44,6 +44,7 @@ export const Register = (props) => {
         
     }
 
+
     return (
         <main style={{ textAlign: "center" }}>
 
@@ -53,7 +54,7 @@ export const Register = (props) => {
             </dialog>
 
             <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Please Register</h1>
+                <h1 className="mizgogPageHeader">Please Register</h1>
                 <fieldset>
                     <label htmlFor="inputusername"> Create Username </label>
                     <input ref={username} type="username" name="username" className="form-control" placeholder="Create Username" required />

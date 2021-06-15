@@ -2,10 +2,13 @@ import React, { useRef } from "react"
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom"
 import "./Login.css"
+import "../../components/Mizgog.css"
 
 
 export const Login = props => {
     const history = useHistory()
+    const username = useRef()
+    const existDialog = useRef()
 
     const existingUserCheck = () => {
         return fetch(`http://localhost:8088/users?username=${username.current.value}`)
@@ -36,14 +39,14 @@ export const Login = props => {
 
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Mizgog's M'accoutrements</h1>
+                    <h1 className="mizgogPageHeader">Mizgog's M'accoutrements</h1>
                     <fieldset>
-                        <label htmlFor="username"> Username </label>
                         <input ref={username} type="username"
                             id="username"
                             className="form-control"
                             placeholder="Username"
-                            required autoFocus />
+                            required autoFocus
+                            />
                     </fieldset>
                     <fieldset>
                         <button type="submit">
