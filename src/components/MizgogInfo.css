@@ -1,8 +1,21 @@
 .rootInfo {
-    text-align: center;
-    color: white;
+  text-align: center;
+  color: white;
+  padding-bottom: 2rem;
 }
 
 .rootInfoHead {
-    margin-top: 7rem;
+  padding-top: 2rem;
+  text-align: center;
+  color: white;
+}
+
+.rootInfoContainerDiv {
+    margin: auto;
+  /* background-color: rgba(0, 0, 0, 0.79); */
+  text-shadow: -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000,
+    1.5px 1.5px 0 #000;
+  margin-top: 5rem;
+  border-radius: 2%;
+  max-width: 75%;
 }

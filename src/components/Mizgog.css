@@ -8,14 +8,29 @@ body {
   background-position: center;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Cinzel Decorative", serif;
-    letter-spacing: 2px;
-  }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Cinzel Decorative", serif;
+  letter-spacing: 2px;
+}
 
+input {
+  text-align: center;
+}
 .mizgogPageHeader {
+  margin: auto;
   text-align: center;
   color: white;
   margin-top: 5rem;
   font-size: 40px;
+  font-weight: bold;
+  /* background-color: rgba(0, 0, 0, 0.79); */
+  padding: 2rem 0;
+  max-width: 75%;
+  text-shadow: -2.2px -2.2px 0 #000, 2.2px -2.2px 0 #000, -2.2px 2.2px 0 #000,
+    2.2px 2.2px 0 #000;
 }

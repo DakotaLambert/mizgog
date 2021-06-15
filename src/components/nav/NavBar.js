@@ -19,7 +19,11 @@ export const NavBar = () => {
                 <Link className="navbar__link" to="/Create-A-Potion"><img src={create} className="createButton"/></Link>
             </li>
             <li className="navbar__item">
-                <Link className="navbar__link" to="/Login"><img src={door} className="logoutButton"/></Link>
+                <Link className="navbar__link" onClick={() => {
+                    localStorage.removeItem("wizard")
+                }}>
+                    <img src={door} className="logoutButton" />
+                </Link>
             </li>
         </ul>
     )
