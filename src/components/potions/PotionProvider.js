@@ -7,13 +7,13 @@ export const PotionProvider = (props) => {
     const [potions, setPotions] = useState([])
 
     const getPotions = () => {
-        return fetch("http://localhost:8088/Potions")
+        return fetch("http://localhost:8088/potions?_embed=potionIngredients")
         .then(response => response.json())
         .then(setPotions)
     }
 
     const addPotion = potionObj => {
-        return fetch("http://localhost:8088/Potions", {
+        return fetch("http://localhost:8088/potions", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

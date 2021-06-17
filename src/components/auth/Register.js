@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import "./Login.css";
 
@@ -61,22 +61,81 @@ export const Register = (props) => {
                       }),
                     })
                       .then((res) => res.json())
-                      .then(() => {
-                        fetch("http://localhost:8088/Potions", {
-                          method: "POST",
-                          headers: {
-                            "Content-Type": "application/json",
-                          },
-                          body: JSON.stringify({
-                            name: "Quick Hands",
-                            description:
-                              "Boosts agility for quicker potion creation, or other nefarious uses.",
-                            color: "#e1ff00",
-                            bookId: createdBook.id,
-                          }),
-                        }).then(() => {
-													history.push("/")
-												});
+                      .then((createdPotion) => {
+                        if (createdPotion.hasOwnProperty("id")) {
+                          fetch("http://localhost:8088/PotionIngredients", {
+                            method: "POST",
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                              potionId: createdPotion.id,
+                              ingredientId: 1,
+                            }),
+                          })
+                            .then((res) => res.json())
+                            .then(() => {
+                              fetch("http://localhost:8088/PotionIngredients", {
+                                method: "POST",
+                                headers: {
+                                  "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify({
+                                  potionId: createdPotion.id,
+                                  ingredientId: 2,
+                                }),
+                              });
+                            })
+                            .then(() => {
+                              fetch("http://localhost:8088/Potions", {
+                                method: "POST",
+                                headers: {
+                                  "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify({
+                                  name: "Quick Hands",
+                                  description:
+                                    "Boosts agility for quicker potion creation, or other nefarious uses.",
+                                  color: "#e1ff00",
+                                  bookId: createdBook.id,
+                                }),
+                              })
+                                .then((res) => res.json())
+                                .then((createdPotionTwo) => {
+                                  if (createdPotionTwo.hasOwnProperty("id")) {
+                                    fetch(
+                                      "http://localhost:8088/PotionIngredients",
+                                      {
+                                        method: "POST",
+                                        headers: {
+                                          "Content-Type": "application/json",
+                                        },
+                                        body: JSON.stringify({
+                                          potionId: createdPotionTwo.id,
+                                          ingredientId: 3,
+                                        }),
+                                      }
+                                    ).then(() => {
+                                      fetch(
+                                        "http://localhost:8088/PotionIngredients",
+                                        {
+                                          method: "POST",
+                                          headers: {
+                                            "Content-Type": "application/json",
+                                          },
+                                          body: JSON.stringify({
+                                            potionId: createdPotionTwo.id,
+                                            ingredientId: 4,
+                                          }),
+                                        }
+                                      ).then(() => {
+                                        history.push("/");
+                                      });
+                                    });
+                                  }
+                                });
+                            });
+                        }
                       });
                   }
                 });
@@ -120,6 +179,5 @@ export const Register = (props) => {
     </main>
   );
 };
-
 
 //2 posts for each potion for ingredients, post for PotionIngredients table, book detail, potion detail, styling

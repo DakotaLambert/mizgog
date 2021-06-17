@@ -21,6 +21,23 @@ h6 {
 input {
   text-align: center;
 }
+
+button {
+  transition-duration: 0.4s;
+  font-family: "Cinzel Decorative", serif;
+  background-color: rgb(34, 34, 34);
+  color: White;
+  padding: .2rem .5rem;
+  font-weight: bold;
+
+}
+button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.50);
+  background-color: white;
+  color: black;
+  font-weight: bold;
+}
+
 .mizgogPageHeader {
   margin: auto;
   text-align: center;
