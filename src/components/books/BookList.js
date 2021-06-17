@@ -1,10 +1,16 @@
 import React, { useContext, useEffect } from "react";
 import { BookContext } from "./BookProvider";
-import "./Books.css";
 import bookForList from "../../Images/book1.png";
+import { useHistory, Link } from "react-router-dom";
+import "./Books.css";
 
 export const BookList = () => {
   const { books, getBooks } = useContext(BookContext);
+
+  const currentUser = parseInt(localStorage.getItem("wizard"))
+  const currentUsersBooks = books.filter(book => currentUser === book.userId)
+
+  const history = useHistory()
 
   useEffect(() => {
     getBooks();
@@ -12,22 +18,27 @@ export const BookList = () => {
 
   return (
     <>
-      <div className="">
-        <h3 className="bookListNames">
-          {books.map((book) => (
-            <>
-              <div>
-                <div>
+
+    <div className="booksPageHeader">
+      Books
+    </div>
+        <div className="books">
+          {currentUsersBooks.map((book) => (
+            
+              <div className="book">
+                <div className="bookName">
                     {book.name}
                 </div>
-                <img src={bookForList} className="bookListImage" />
+                <Link to={`/Books/detail/${book.id}`}><img src={bookForList} className="bookListImage" /></Link>
+                <button>Edit</button>
+                <button>Delete</button>
+                
               </div>
-            </>
+              
+            
           ))}
-        </h3>
-      </div>
-
-      <button>Create Book</button>
+        </div>
+      <button onClick={() => history.push("/Books/create")}>Create Book</button>
     </>
   );
 };
