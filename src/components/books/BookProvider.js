@@ -12,6 +12,10 @@ export const BookProvider = (props) => {
         .then(setBooks)
     }
 
+     const getBookById = (bookId) => {
+         return fetch(`http://localhost:8088/books/detail/${bookId}`)
+         .then(res => res.json())
+     }
 
     const addBook = bookObj => {
         return fetch("http://localhost:8088/books", {
@@ -24,9 +28,16 @@ export const BookProvider = (props) => {
         .then(getBooks)
     }
 
+    const deleteBook = (bookId) => {
+        return fetch(`http://localhost:8088/books/${bookId}`, {
+            method: "DELETE"
+        })
+        .then(getBooks)
+    }
+
     return (
         <BookContext.Provider value={{
-            books, getBooks, addBook
+            books, getBooks, addBook, deleteBook, getBookById
         }}>
             {props.children}
         </BookContext.Provider>

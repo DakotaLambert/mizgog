@@ -7,6 +7,7 @@ import { BookCreateForm } from "./books/BookCreateForm";
 import { BookDetail } from "./books/BookDetail";
 import { PotionProvider } from "./potions/PotionProvider";
 import { PotionCreateForm } from "./potions/PotionCreateForm";
+import { PotionDetail } from "./potions/PotionDetail";
 import { IngredientProvider } from "./ingredients /IngredientProvider";
 
 export const ApplicationViews = () => {
@@ -26,20 +27,28 @@ export const ApplicationViews = () => {
             <BookCreateForm />
           </Route>
           <Route exact path="/Books/detail/:bookId(\d+)">
-             <BookDetail />
+            <BookDetail />
           </Route>
+          <IngredientProvider>
+            <Route exact path="/Books/PotionDetail/:potionId(\d+)">
+              <PotionDetail />
+            </Route>
+          </IngredientProvider>
         </PotionProvider>
       </BookProvider>
 
       <PotionProvider>
         <BookProvider>
-            <IngredientProvider>
-          <Route exact path="/Create-A-Potion">
-            <PotionCreateForm />
-          </Route>
+          <IngredientProvider>
+            <Route exact path="/Create-A-Potion">
+              <PotionCreateForm />
+            </Route>
           </IngredientProvider>
         </BookProvider>
       </PotionProvider>
+
+
+
     </>
   );
 };
