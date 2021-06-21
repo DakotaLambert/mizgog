@@ -12,6 +12,11 @@ export const PotionProvider = (props) => {
         .then(setPotions)
     }
 
+    const getPotionById = (potionId) => {
+        return fetch(`http://localhost:8088/potions/${potionId}`)
+        .then(response => response.json())
+    }
+
     const addPotion = potionObj => {
         return fetch("http://localhost:8088/potions", {
             method: "POST",
@@ -20,12 +25,12 @@ export const PotionProvider = (props) => {
             },
             body: JSON.stringify(potionObj)
         })
-        .then(getPotions)
+        .then(res => res.json())
     }
 
     return (
         <PotionContext.Provider value={{
-            potions, getPotions, addPotion
+            potions, getPotions, addPotion, getPotionById
         }}>
             {props.children}
         </PotionContext.Provider>

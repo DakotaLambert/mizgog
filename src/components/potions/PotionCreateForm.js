@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { BookContext } from "../books/BookProvider";
-import { PotionContext } from "./PotionProvider";
 import { IngredientContext } from "../ingredients /IngredientProvider";
+import { PotionContext } from "./PotionProvider";
 import "./Potions.css";
 
 export const PotionCreateForm = () => {
   const { addPotion } = useContext(PotionContext);
-  // const { addIngredient } = useContext(IngredientContext)
   const { books, getBooks } = useContext(BookContext);
+  const { addIngredient } = useContext(IngredientContext)
+  const { addPotionIngredient } = useContext(IngredientContext)
+  const history = useHistory();
 
   const [potion, setPotion] = useState({
     name: "",
@@ -16,14 +18,25 @@ export const PotionCreateForm = () => {
     description: "",
     bookId: 0,
   });
+
+  
   const [ingredient, setIngredient] = useState({
     name: "",
   });
+  
   const [ingredientTwo, setIngredientTwo] = useState({
     name: "",
   });
-
-  const history = useHistory();
+  
+  const [potionIngredient, setPotionIngredient] = useState({
+    potionId: potion.id,
+    ingredientId: ingredient.id
+  })
+  const [potionIngredientTwo, setPotionIngredientTwo] = useState({
+    potionId: potion.id,
+    ingredientId: ingredientTwo.id
+  })
+  
 
   useEffect(() => {
     getBooks();
@@ -44,6 +57,7 @@ export const PotionCreateForm = () => {
 
     setIngredient(newIngredient);
   };
+
   const handleIngredientTwoInputChange = (event) => {
     const newIngredientTwo = { ...ingredientTwo };
 
@@ -51,6 +65,23 @@ export const PotionCreateForm = () => {
 
     setIngredientTwo(newIngredientTwo);
   };
+
+  // const handlePotionIngredientInputChange = (event) => {
+  //   const newPotionIngredient = { ...potionIngredient };
+
+  //   newPotionIngredient[event.target.id] = event.target.value;
+
+  //   setPotionIngredient(newPotionIngredient);
+  // };
+  // const handlePotionIngredientTwoInputChange = (event) => {
+  //   const newPotionIngredientTwo = { ...potionIngredientTwo };
+
+  //   newPotionIngredientTwo[event.target.id] = event.target.value;
+
+  //   setPotionIngredientTwo(newPotionIngredientTwo);
+  // };
+
+
 
   const handleAddPotion = () => {
     const bookId = parseInt(potion.bookId);
@@ -63,9 +94,25 @@ export const PotionCreateForm = () => {
         color: potion.color,
         description: potion.description,
         bookId: bookId,
-      };
-      addPotion(newPotion).then(() => history.push(`/Books/detail/${bookId}`));
-    }
+      }
+      addPotion(newPotion)
+      .then((createdPotion) => {
+        if (createdPotion.hasOwnProperty("id")) {
+          addIngredient(ingredient)
+            .then(() => {
+              addIngredient(ingredientTwo)
+            }).then((createdIngredient) => {
+              if (createdIngredient.hasOwnProperty("id")) {
+                addPotionIngredient(potionIngredient)
+                .then(() => {
+                  addPotionIngredient(potionIngredientTwo)
+                })
+          
+              }
+            })
+          }
+        }).then(() => history.push(`/Books/detail/${bookId}`));
+      }
   };
 
   return (
@@ -90,8 +137,9 @@ export const PotionCreateForm = () => {
           id="name"
           required
           placeholder="Ingredient #1"
-          value={ingredient.name}
+          value={ingredient.name, ingredient.id}
           onChange={handleIngredientInputChange}
+          
         ></input>
       </fieldset>
       <fieldset>
@@ -102,6 +150,7 @@ export const PotionCreateForm = () => {
           placeholder="Ingredient #2"
           value={ingredientTwo.name}
           onChange={handleIngredientTwoInputChange}
+          
         ></input>
       </fieldset>
       <fieldset>
@@ -139,7 +188,7 @@ export const PotionCreateForm = () => {
       <button
         onClick={(event) => {
           event.preventDefault();
-          fetch("").then(handleAddPotion());
+          handleAddPotion()
         }}
       >
         Save Potion

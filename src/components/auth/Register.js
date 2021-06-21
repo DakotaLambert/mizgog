@@ -34,7 +34,7 @@ export const Register = (props) => {
             if (createdUser.hasOwnProperty("id")) {
               localStorage.setItem("wizard", createdUser.id);
 
-              fetch("http://localhost:8088/Books", {
+              fetch("http://localhost:8088/books", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -47,7 +47,7 @@ export const Register = (props) => {
                 .then((res) => res.json())
                 .then((createdBook) => {
                   if (createdBook.hasOwnProperty("id")) {
-                    fetch("http://localhost:8088/Potions", {
+                    fetch("http://localhost:8088/potions", {
                       method: "POST",
                       headers: {
                         "Content-Type": "application/json",
@@ -63,7 +63,7 @@ export const Register = (props) => {
                       .then((res) => res.json())
                       .then((createdPotion) => {
                         if (createdPotion.hasOwnProperty("id")) {
-                          fetch("http://localhost:8088/PotionIngredients", {
+                          fetch("http://localhost:8088/potionIngredients", {
                             method: "POST",
                             headers: {
                               "Content-Type": "application/json",
@@ -75,7 +75,7 @@ export const Register = (props) => {
                           })
                             .then((res) => res.json())
                             .then(() => {
-                              fetch("http://localhost:8088/PotionIngredients", {
+                              fetch("http://localhost:8088/potionIngredients", {
                                 method: "POST",
                                 headers: {
                                   "Content-Type": "application/json",
@@ -87,7 +87,7 @@ export const Register = (props) => {
                               });
                             })
                             .then(() => {
-                              fetch("http://localhost:8088/Potions", {
+                              fetch("http://localhost:8088/potions", {
                                 method: "POST",
                                 headers: {
                                   "Content-Type": "application/json",
@@ -104,7 +104,7 @@ export const Register = (props) => {
                                 .then((createdPotionTwo) => {
                                   if (createdPotionTwo.hasOwnProperty("id")) {
                                     fetch(
-                                      "http://localhost:8088/PotionIngredients",
+                                      "http://localhost:8088/potionIngredients",
                                       {
                                         method: "POST",
                                         headers: {
@@ -117,7 +117,7 @@ export const Register = (props) => {
                                       }
                                     ).then(() => {
                                       fetch(
-                                        "http://localhost:8088/PotionIngredients",
+                                        "http://localhost:8088/potionIngredients",
                                         {
                                           method: "POST",
                                           headers: {

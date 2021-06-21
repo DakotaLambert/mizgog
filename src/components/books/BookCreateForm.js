@@ -22,17 +22,18 @@ export const BookCreateForm = () => {
   };
 
   const handleAddBook = () => {
-
-    const userId = parseInt(localStorage.getItem("wizard"))
+    const userId = parseInt(localStorage.getItem("wizard"));
 
     if (book.name === "") {
-      render();
+      console.log("dont refresh please");
     } else {
       const newBook = {
         name: book.name,
-        userId: userId
+        userId: userId,
       };
-      addBook(newBook).then(() => history.push("/Books"));
+      addBook(newBook).then(() => {
+        history.push("/Books");
+      });
     }
   };
 
@@ -51,13 +52,10 @@ export const BookCreateForm = () => {
           />
         </div>
       </fieldset>
-      <button
-        onClick={() => {
-          handleAddBook();
-        }}
-      >
-        Save Book
-      </button>
+      <button onClick={(event) => {
+        event.preventDefault()
+        handleAddBook()
+        }}>Save Book</button>
     </form>
   );
 };
