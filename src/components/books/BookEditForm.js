@@ -1,9 +1,10 @@
-import React, { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import { BookContext } from "./BookProvider";
 
-export const BookCreateForm = () => {
-  const { addBook } = useContext(BookContext);
+export const BookEditForm = () => {
+  const { updateBook, getBookById } = useContext(BookContext);
+  
 
   const [book, setBook] = useState({
     name: "",
@@ -11,6 +12,17 @@ export const BookCreateForm = () => {
   });
 
   const history = useHistory();
+
+  const { bookId } = useParams()
+
+  useEffect(() => {
+    if (bookId) {
+      getBookById(bookId)
+      .then(book => {
+        setBook(book)
+      })
+    }
+  }, [])
 
   const handleInputChange = (event) => {
     const newBook = { ...book };
@@ -20,17 +32,18 @@ export const BookCreateForm = () => {
     setBook(newBook);
   };
 
-  const handleAddBook = () => {
+  const handleUpdateBook = () => {
     const userId = parseInt(localStorage.getItem("wizard"));
 
     if (book.name === "") {
-      window.alert("Please enter a book name");
+      window.alert("Please enter a name");
     } else {
-      const newBook = {
+      const changedBook = {
+        id: book.id,
         name: book.name.toUpperCase(),
         userId: userId,
       };
-      addBook(newBook).then(() => {
+      updateBook(changedBook).then(() => {
         history.push("/Books");
       });
     }
@@ -53,8 +66,8 @@ export const BookCreateForm = () => {
       </fieldset>
       <button onClick={(event) => {
         event.preventDefault()
-        handleAddBook()
-        }}>Save Book</button>
+        handleUpdateBook()
+        }}>EDIT BOOK</button>
         <button onClick={() => {
           history.goBack([1])
         }}>CANCEL</button>

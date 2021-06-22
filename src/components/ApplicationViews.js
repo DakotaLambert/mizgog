@@ -5,6 +5,7 @@ import { BookList } from "./books/BookList";
 import { BookProvider } from "./books/BookProvider";
 import { BookCreateForm } from "./books/BookCreateForm";
 import { BookDetail } from "./books/BookDetail";
+import { BookEditForm } from "./books/BookEditForm"
 import { PotionProvider } from "./potions/PotionProvider";
 import { PotionCreateForm } from "./potions/PotionCreateForm";
 import { PotionDetail } from "./potions/PotionDetail";
@@ -25,6 +26,9 @@ export const ApplicationViews = () => {
 
           <Route exact path="/Books/create">
             <BookCreateForm />
+          </Route>
+          <Route exact path="/Books/edit/:bookId(\d+)">
+            <BookEditForm />
           </Route>
           <Route exact path="/Books/detail/:bookId(\d+)">
             <BookDetail />

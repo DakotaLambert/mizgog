@@ -8,8 +8,7 @@ import "./Potions.css";
 export const PotionCreateForm = () => {
   const { addPotion } = useContext(PotionContext);
   const { books, getBooks } = useContext(BookContext);
-  const { addIngredient } = useContext(IngredientContext)
-  const { addPotionIngredient } = useContext(IngredientContext)
+  const { addIngredient, addPotionIngredient } = useContext(IngredientContext);
   const history = useHistory();
 
   const [potion, setPotion] = useState({
@@ -19,24 +18,22 @@ export const PotionCreateForm = () => {
     bookId: 0,
   });
 
-  
   const [ingredient, setIngredient] = useState({
-    name: "",
+    name: "".toUpperCase(),
   });
-  
+
   const [ingredientTwo, setIngredientTwo] = useState({
-    name: "",
+    name: "".toUpperCase(),
   });
-  
-  const [potionIngredient, setPotionIngredient] = useState({
-    potionId: potion.id,
-    ingredientId: ingredient.id
-  })
-  const [potionIngredientTwo, setPotionIngredientTwo] = useState({
-    potionId: potion.id,
-    ingredientId: ingredientTwo.id
-  })
-  
+
+  // const [ potionIngredientOne ] = useState ({
+  //   potiondId: 0,
+  //   ingredientId: 0
+  // })
+  // const [ potionIngredientTwo ] = useState ({
+  //   potiondId: 0,
+  //   ingredientId: 0
+  // })
 
   useEffect(() => {
     getBooks();
@@ -66,23 +63,6 @@ export const PotionCreateForm = () => {
     setIngredientTwo(newIngredientTwo);
   };
 
-  // const handlePotionIngredientInputChange = (event) => {
-  //   const newPotionIngredient = { ...potionIngredient };
-
-  //   newPotionIngredient[event.target.id] = event.target.value;
-
-  //   setPotionIngredient(newPotionIngredient);
-  // };
-  // const handlePotionIngredientTwoInputChange = (event) => {
-  //   const newPotionIngredientTwo = { ...potionIngredientTwo };
-
-  //   newPotionIngredientTwo[event.target.id] = event.target.value;
-
-  //   setPotionIngredientTwo(newPotionIngredientTwo);
-  // };
-
-
-
   const handleAddPotion = () => {
     const bookId = parseInt(potion.bookId);
 
@@ -90,29 +70,33 @@ export const PotionCreateForm = () => {
       window.alert("Please select a book to add this potion to!");
     } else {
       const newPotion = {
-        name: potion.name,
+        name: potion.name.toUpperCase(),
         color: potion.color,
         description: potion.description,
         bookId: bookId,
-      }
-      addPotion(newPotion)
-      .then((createdPotion) => {
+      };
+      addPotion(newPotion).then((createdPotion) => {
         if (createdPotion.hasOwnProperty("id")) {
-          addIngredient(ingredient)
-            .then(() => {
-              addIngredient(ingredientTwo)
-            }).then((createdIngredient) => {
-              if (createdIngredient.hasOwnProperty("id")) {
-                addPotionIngredient(potionIngredient)
-                .then(() => {
-                  addPotionIngredient(potionIngredientTwo)
-                })
-          
-              }
-            })
-          }
-        }).then(() => history.push(`/Books/detail/${bookId}`));
-      }
+          addIngredient(ingredient).then((ingredientOne) => {
+            addIngredient(ingredientTwo).then((createdIngredientTwo) => {
+              addPotionIngredient({
+                potionId: createdPotion.id,
+                ingredientId: ingredientOne.id,
+              }).then(() => {
+                console.log("Adding last ingredient relationship");
+                addPotionIngredient({
+                  potionId: createdPotion.id,
+                  ingredientId: createdIngredientTwo.id,
+                }).then(() => {
+                  console.log("History push");
+                  history.push(`/Books/detail/${bookId}`);
+                });
+              });
+            });
+          });
+        }
+      });
+    }
   };
 
   return (
@@ -137,9 +121,8 @@ export const PotionCreateForm = () => {
           id="name"
           required
           placeholder="Ingredient #1"
-          value={ingredient.name, ingredient.id}
+          value={ingredient.name}
           onChange={handleIngredientInputChange}
-          
         ></input>
       </fieldset>
       <fieldset>
@@ -150,7 +133,6 @@ export const PotionCreateForm = () => {
           placeholder="Ingredient #2"
           value={ingredientTwo.name}
           onChange={handleIngredientTwoInputChange}
-          
         ></input>
       </fieldset>
       <fieldset>
@@ -188,13 +170,14 @@ export const PotionCreateForm = () => {
       <button
         onClick={(event) => {
           event.preventDefault();
-          handleAddPotion()
+          handleAddPotion();
         }}
       >
         Save Potion
       </button>
       <button
-        onClick={() => {
+        onClick={(event) => {
+          event.preventDefault();
           history.goBack([1]);
         }}
       >

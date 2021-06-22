@@ -13,7 +13,7 @@ export const PotionProvider = (props) => {
     }
 
     const getPotionById = (potionId) => {
-        return fetch(`http://localhost:8088/potions/${potionId}`)
+        return fetch(`http://localhost:8088/potions/${potionId}?_embed=potionIngredients`)
         .then(response => response.json())
     }
 
@@ -28,9 +28,15 @@ export const PotionProvider = (props) => {
         .then(res => res.json())
     }
 
+    const deletePotion = (potionId) => {
+        return fetch(`http://localhost:8088/potions/${potionId}`, {
+            method: "DELETE"
+        })
+        .then(getPotions)
+    }
     return (
         <PotionContext.Provider value={{
-            potions, getPotions, addPotion, getPotionById
+            potions, getPotions, addPotion, getPotionById, deletePotion
         }}>
             {props.children}
         </PotionContext.Provider>

@@ -17,7 +17,7 @@ export const IngredientDetail = ({ pIngredientId }) => {
 
   return (
     <>
-      <div>{ingredient.name}</div>
+      <div className="potionIngredientNames">{ingredient.name }</div>
     </>
   );
 };

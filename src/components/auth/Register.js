@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useRef } from "react";
 import { useHistory } from "react-router-dom";
 import "./Login.css";
 
@@ -53,7 +53,7 @@ export const Register = (props) => {
                         "Content-Type": "application/json",
                       },
                       body: JSON.stringify({
-                        name: "Apprentice Potion",
+                        name: "APPRENTICE POTION",
                         description:
                           "The basic potion for all apprentice Wizards. This potion grants you the ability to create more advanced potions.",
                         color: "#0a0eeb",
@@ -93,7 +93,7 @@ export const Register = (props) => {
                                   "Content-Type": "application/json",
                                 },
                                 body: JSON.stringify({
-                                  name: "Quick Hands",
+                                  name: "QUICK HANDS",
                                   description:
                                     "Boosts agility for quicker potion creation, or other nefarious uses.",
                                   color: "#e1ff00",

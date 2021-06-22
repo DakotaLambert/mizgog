@@ -29,15 +29,15 @@ export const IngredientProvider = (props) => {
     }).then((res) => res.json());
   };
 
-//   const addPotionIngredient = (ingredientObj) => {
-//     return fetch("http://localhost:8088/potionIngredients", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(ingredientObj),
-//     }).then((response) => response.json());
-//   };
+  const addPotionIngredient = (ingredientObj) => {
+    return fetch("http://localhost:8088/potionIngredients", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(ingredientObj),
+    }).then((response) => response.json())
+  };
 
   return (
     <IngredientContext.Provider
@@ -46,6 +46,7 @@ export const IngredientProvider = (props) => {
         getIngredients,
         addIngredient,
         getPotionIngredientById,
+        addPotionIngredient
         
       }}
     >
