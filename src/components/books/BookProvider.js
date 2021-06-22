@@ -13,7 +13,7 @@ export const BookProvider = (props) => {
     }
 
      const getBookById = (bookId) => {
-         return fetch(`http://localhost:8088/books/detail/${bookId}`)
+         return fetch(`http://localhost:8088/books/${bookId}?_embed=potions`)
          .then(res => res.json())
      }
 
@@ -35,9 +35,20 @@ export const BookProvider = (props) => {
         .then(getBooks)
     }
 
+    const updateBook = (book) => {
+        return fetch(`http://localhost:8088/books/${book.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(book)
+        })
+        .then(getBooks)
+    }
+
     return (
         <BookContext.Provider value={{
-            books, getBooks, addBook, deleteBook, getBookById
+            books, getBooks, addBook, deleteBook, getBookById, updateBook
         }}>
             {props.children}
         </BookContext.Provider>
