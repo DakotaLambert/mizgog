@@ -1,13 +1,61 @@
-.potionCreateHead {
-  color: white;
+.potionDetailsContainer {
+  display: flex;
+  justify-content: space-evenly;
+  margin: auto;
+  max-width: 900px;
 }
 
-.potionIngredientName {
+
+.potionCreateHead {
+  margin-top: 5rem;
+  text-align: center;
   color: white;
+  text-shadow: -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000,
+    1.5px 1.5px 0 #000;
+}
+
+.potionColor {
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+.potionDescription {
+  margin: auto;
+  border: 3px solid black;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  max-width: 900px;
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20rem;
+  text-shadow: -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000,
+    1.5px 1.5px 0 #000;
+    background-color: rgb(43, 42, 42);
 }
 
 .potionImage {
   max-height: 9rem;
+}
+
+.potionDetailImage {
+  max-height: 11rem;
+}
+
+.potionPageHeader {
+  border: 3px outset black;
+  border-radius: 10px;
+  padding: 1rem 2rem;
+  background-color: rgba(24, 24, 24, 0.8);
+  margin: auto;
+  max-width: 700px;
+  font-size: 50px;
+    margin-top: 4rem;
+    margin-bottom: 6.5rem;
+    color: white;
+    text-align: center;
+    text-shadow: -2.2px -2.2px 0 #000, 2.2px -2.2px 0 #000, -2.2px 2.2px 0 #000, 2.2px 2.2px 0 #000;
 }
 
 .potion {
@@ -17,39 +65,104 @@
   justify-content: space-around;
   padding-left: 0;
   align-items: center;
-  color: white;
-  flex-basis: 30%;
+  flex-basis: 25%;
+  margin: 1.5rem;
 }
 .potions {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: space-between;
   padding-left: 0;
   align-items: center;
   color: white;
-  margin-top: 5rem;
+  max-width: 1000px;
+  margin: auto;
 }
 .potionName {
-  font-size: 21px;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-    1px 1px 0 #000;
+  text-align: center;
+  font-size: 25px;
+  text-shadow: -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000,
+    1.5px 1.5px 0 #000;
 }
 
-.potionDetailName {
-    font-size: 21px;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-    1px 1px 0 #000;
+.potionDetailPageName {
+  font-size: 35px;
+    margin-top: 1rem;
+    margin-bottom: 6.5rem;
     color: white;
+    text-align: center;
+    text-shadow: -2.2px -2.2px 0 #000, 2.2px -2.2px 0 #000, -2.2px 2.2px 0 #000, 2.2px 2.2px 0 #000;
 }
 
-.potionIngredientNames {
-  color: white;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-    1px 1px 0 #000;
+.potionIngredientDetailNames {
+  font-size: 25px;
+    margin: .5rem 0;
+    color: white;
+    text-shadow: -1.3px -1.3px 0 #000, 1.3px -1.3px 0 #000, -1.3px 1.3px 0 #000, 1.3px 1.3px 0 #000;
+    font-weight: bold;
 }
 
-/* .potionColor {
-  background-color: #0a0eeb;
-  height: 5rem;
-  width: 5rem;
-} */
+.potionIngredients {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-basis: 30%;
+}
+.potionIngredientTitle {
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 30px;
+    color: white;
+    text-shadow: -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000;
+}
+
+.potionNameAndIngredientDiv {
+  flex-basis: 30%;
+  text-align: center;
+}
+
+.potionFormContainer {
+  max-width: 100%;
+    margin: auto;
+}
+
+.potionFormField {
+  display: block;
+    width: 100%;
+    padding: 8px 0;
+    text-indent: 2%;
+}
+
+.potionFormBox {
+  border-width: 3px;
+    max-width: 700px;
+    margin: auto;
+}
+
+.potionColorField {
+  display: block;
+    width: 25%;
+    
+    text-indent: 2%;
+}
+.potionColorFieldDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.potionCreateButtonDiv {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  max-width: 700px;
+  margin: auto;
+}
+
+.backgroundDetail {
+  background-color: rgba(24, 24, 24, 0.8);
+border-radius: 10px;
+  max-width: 700px;
+  margin: auto;
+  padding: 2rem 2rem;
+  border: 3px outset black;
+}
