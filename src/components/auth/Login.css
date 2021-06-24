@@ -10,6 +10,31 @@ fieldset {
   border: 0;
 }
 
+a:link {
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+    font-size: 18px;
+}
+
+/* visited link */
+a:visited {
+  color: white;
+}
+
+/* mouse over link */
+a:hover {
+  transition-duration: 0.4s;
+  color: black;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
+    1px 1px 0 #fff;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+}
+
 .form--login {
   /* display: inline-block; */
   margin: 0 auto;
@@ -20,6 +45,11 @@ fieldset {
 .label--login {
   width: 8rem;
   display: inline-block;
+}
+
+
+.linkRegister {
+  color: white;
 }
 
 .form-control {

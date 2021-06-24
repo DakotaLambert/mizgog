@@ -1,14 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { BookContext } from "../books/BookProvider";
 import { IngredientContext } from "../ingredients /IngredientProvider";
 import { PotionContext } from "./PotionProvider";
 import "./Potions.css";
 
-export const PotionCreateForm = () => {
-  const { addPotion } = useContext(PotionContext);
-  const { books, getBooks } = useContext(BookContext);
-  const { addIngredient, addPotionIngredient } = useContext(IngredientContext);
+export const PotionEditForm = () => {
+  const { books } = useContext(BookContext);
+  const { getPotionById } = useContext(PotionContext);
+  const { getBooks } = useContext(BookContext);
+  const { getIngredientById } = useContext(IngredientContext);
+  const { updatePotion } = useContext(PotionContext);
+  const { updateIngredient } = useContext(IngredientContext);
+
+
+  const currentUser = parseInt(localStorage.getItem("wizard"))
+  const currentUsersBooks = books.filter(book => currentUser === book.userId)
+
   const history = useHistory();
 
   const [potion, setPotion] = useState({
@@ -16,6 +24,7 @@ export const PotionCreateForm = () => {
     color: "",
     description: "",
     bookId: 0,
+    potionIngredients: [],
   });
 
   const [ingredient, setIngredient] = useState({
@@ -26,10 +35,77 @@ export const PotionCreateForm = () => {
     name: "",
   });
 
+  const { potionId } = useParams();
 
   useEffect(() => {
     getBooks();
   }, []);
+
+  useEffect(() => {
+    getPotionById(parseInt(potionId))
+    .then((potion) => {
+      setPotion(potion);
+      const ingred = potion.potionIngredients[0];
+      const ingredTwo = potion.potionIngredients[1];
+
+      if (ingred) {
+        getIngredientById(ingred.ingredientId).then((ingredientOne) => {
+          setIngredient(ingredientOne);
+        });
+      }
+      if (ingredTwo) {
+        getIngredientById(ingredTwo.ingredientId).then((ingredientTwo) => {
+          setIngredientTwo(ingredientTwo);
+        });
+      }
+    });
+  }, []);
+
+  // useEffect(() => {
+  //   const ingred = potion.potionIngredients[0];
+  //   const ingredTwo = potion.potionIngredients[1]
+
+  //   if (ingred) {
+  //     getIngredientById(ingred.ingredientId)
+  //     .then((ingredientOne) => {
+  //       setIngredient(ingredientOne);
+  //     });
+  //   }
+  //   if (ingredTwo) {
+  //     getIngredientById(ingredTwo.ingredientId)
+  //     .then((ingredientTwo) => {
+  //       setIngredientTwo(ingredientTwo)
+  //     })
+  //   }
+  // }, [potion]);
+
+  const handleUpdatePotion = () => {
+    
+    const updatedPotion = {
+      id: potion.id,
+      name: potion.name.toUpperCase(),
+      color: potion.color,
+      description: potion.description,
+      bookId: parseInt(potion.bookId),
+    };
+    const updatedIngredient = {
+      id: ingredient.id,
+      name: ingredient.name,
+    };
+    const updatedIngredientTwo = {
+      id: ingredientTwo.id,
+      name: ingredientTwo.name,
+    };
+
+    updatePotion(updatedPotion)
+      .then(() => {
+        updateIngredient(updatedIngredient);
+        updateIngredient(updatedIngredientTwo);
+      })
+      .then(() => {
+        history.push(`/Books/PotionDetail/${potion.id}`);
+      });
+  };
 
   const handleInputChange = (event) => {
     const newPotion = { ...potion };
@@ -55,54 +131,15 @@ export const PotionCreateForm = () => {
     setIngredientTwo(newIngredientTwo);
   };
 
-  const handleAddPotion = () => {
-    const bookId = parseInt(potion.bookId);
-
-    if (bookId === 0) {
-      window.alert("Please select a book to add this potion to!");
-    } else {
-      const newPotion = {
-        name: potion.name.toUpperCase(),
-        color: potion.color,
-        description: potion.description,
-        bookId: bookId,
-      };
-      addPotion(newPotion).then((createdPotion) => {
-        if (createdPotion.hasOwnProperty("id")) {
-          addIngredient(ingredient)
-          .then((ingredientOne) => {
-            addIngredient(ingredientTwo)
-            .then((createdIngredientTwo) => {
-              addPotionIngredient({
-                potionId: createdPotion.id,
-                ingredientId: ingredientOne.id,
-              })
-              .then(() => {
-                console.log("Adding last ingredient relationship");
-                addPotionIngredient({
-                  potionId: createdPotion.id,
-                  ingredientId: createdIngredientTwo.id,
-                })
-                .then(() => {
-                  console.log("History push");
-                  history.push(`/Books/detail/${bookId}`);
-                });
-              });
-            });
-          });
-        }
-      });
-    }
-  };
-
   return (
     <form>
-      <h2 className="potionCreateHead">Create-A-Potion</h2>
+      <h2 className="potionCreateHead">Edit-A-Potion</h2>
       <fieldset>
-        <div>
+        <div className="potionFormBox">
           <input
             type="text"
             id="name"
+            className="potionFormField"
             required
             autoFocus
             placeholder="Potion Name"
@@ -111,51 +148,57 @@ export const PotionCreateForm = () => {
           />
         </div>
       </fieldset>
-      <fieldset>
+      <fieldset className="potionFormBox">
         <input
           type="text"
           id="name"
+          className="potionFormField"
           required
           placeholder="Ingredient #1"
           value={ingredient.name}
           onChange={handleIngredientInputChange}
         ></input>
       </fieldset>
-      <fieldset>
+      <fieldset className="potionFormBox">
         <input
           type="text"
           id="name"
+          className="potionFormField"
           required
           placeholder="Ingredient #2"
           value={ingredientTwo.name}
           onChange={handleIngredientTwoInputChange}
         ></input>
       </fieldset>
-      <fieldset>
-        <div>
-          <input type="color" id="color" onChange={handleInputChange}></input>
+      <fieldset className="potionFormBox">
+        <div className="potionColorFieldDiv">
+          <input className="potionColorField" type="color" id="color" onChange={handleInputChange}></input>
         </div>
       </fieldset>
-      <fieldset>
+      <fieldset className="potionFormBox">
         <textarea
           type="text"
           id="description"
+          className="potionFormField"
           required
+          rows="4"
+          cols="10"
           placeholder="Potion Description"
           value={potion.description}
           onChange={handleInputChange}
         ></textarea>
       </fieldset>
-      <fieldset>
-        <div>
+      <fieldset className="potionFormBox">
+        <div className="potionColorFieldDiv">
           <select
             name="book"
+            className="potionColorField"
             id="bookId"
             value={potion.bookId}
             onChange={handleInputChange}
           >
             <option>Select a Book</option>
-            {books.map((book) => (
+            {currentUsersBooks.map((book) => (
               <option value={book.id} key={book.id}>
                 {book.name}
               </option>
@@ -163,22 +206,25 @@ export const PotionCreateForm = () => {
           </select>
         </div>
       </fieldset>
+
+      <div className="potionCreateButtonDiv">
       <button
         onClick={(event) => {
           event.preventDefault();
-          handleAddPotion();
+          handleUpdatePotion();
         }}
       >
-        Save Potion
+        EDIT POTION
       </button>
       <button
         onClick={(event) => {
           event.preventDefault();
-          history.goBack([1]);
+          history.push(`/Books/PotionDetail/${potion.id}`);
         }}
       >
-        Cancel
+        CANCEL
       </button>
+      </div>
     </form>
   );
 };

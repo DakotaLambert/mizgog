@@ -4,7 +4,6 @@ import { BookContext } from "./BookProvider";
 
 export const BookEditForm = () => {
   const { updateBook, getBookById } = useContext(BookContext);
-  
 
   const [book, setBook] = useState({
     name: "",
@@ -13,16 +12,15 @@ export const BookEditForm = () => {
 
   const history = useHistory();
 
-  const { bookId } = useParams()
+  const { bookId } = useParams();
 
   useEffect(() => {
     if (bookId) {
-      getBookById(bookId)
-      .then(book => {
-        setBook(book)
-      })
+      getBookById(bookId).then((book) => {
+        setBook(book);
+      });
     }
-  }, [])
+  }, []);
 
   const handleInputChange = (event) => {
     const newBook = { ...book };
@@ -64,13 +62,22 @@ export const BookEditForm = () => {
           />
         </div>
       </fieldset>
-      <button onClick={(event) => {
-        event.preventDefault()
-        handleUpdateBook()
-        }}>EDIT BOOK</button>
-        <button onClick={() => {
-          history.goBack([1])
-        }}>CANCEL</button>
+      <button
+        onClick={(event) => {
+          event.preventDefault();
+          handleUpdateBook();
+        }}
+      >
+        EDIT BOOK
+      </button>
+      <button
+        onClick={(event) => {
+          event.preventDefault();
+          history.goBack([1]);
+        }}
+      >
+        CANCEL
+      </button>
     </form>
   );
 };

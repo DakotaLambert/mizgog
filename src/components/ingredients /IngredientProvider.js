@@ -13,6 +13,10 @@ export const IngredientProvider = (props) => {
       .then(setIngredients);
   };
 
+  const getIngredientById = (ingredientId) => {
+    return fetch(`http://localhost:8088/ingredients/${ingredientId}?_embed=potionIngredients`)
+    .then(response => response.json())
+}
 
   const getPotionIngredientById = (pIngredientId) => {
     return fetch(`http://localhost:8088/potionIngredients/${pIngredientId}?_expand=ingredient`)
@@ -39,6 +43,17 @@ export const IngredientProvider = (props) => {
     }).then((response) => response.json())
   };
 
+  const updateIngredient = (ingredient) => {
+    return fetch(`http://localhost:8088/ingredients/${ingredient.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(ingredient)
+    })
+    .then(getIngredients)
+}
+
   return (
     <IngredientContext.Provider
       value={{
@@ -46,7 +61,9 @@ export const IngredientProvider = (props) => {
         getIngredients,
         addIngredient,
         getPotionIngredientById,
-        addPotionIngredient
+        addPotionIngredient,
+        updateIngredient,
+        getIngredientById
         
       }}
     >

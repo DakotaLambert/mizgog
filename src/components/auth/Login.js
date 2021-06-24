@@ -41,7 +41,7 @@ export const Login = props => {
                 <form className="form--login" onSubmit={handleLogin}>
                     <h1 className="mizgogPageHeader">Mizgog's M'accoutrements</h1>
                     <fieldset>
-                        <input ref={username.toUpperCase()} type="username"
+                        <input ref={username} type="username"
                             id="username"
                             className="form-control"
                             placeholder="Username"
@@ -55,7 +55,7 @@ export const Login = props => {
                     </fieldset>
                 </form>
             </section>
-            <section className="link--register">
+            <section className="linkRegister">
                 <Link to="/register">No account? Register!</Link>
             </section>
         </main>

@@ -27,22 +27,31 @@ export const BookList = () => {
     <div className="booksPageHeader">
       BooKS
     </div>
+
     <div className="creatBookButtonDiv">
+
       <button onClick={() => history.push("/Books/create")} className="createBookButton">CREATE BOOK</button>
+
       </div>
+
         <div className="books">
+
           {currentUsersBooks.map((book) => (
             
               <div className="book">
+
                 <div className="bookName">
                     {book.name}
                 </div>
+
                 <Link to={`/Books/detail/${book.id}`}><img src={bookForList} className="bookListImage" key={book.image}/></Link>
+
                 <button className="editBookButton" onClick={() => {
                   history.push(`Books/edit/${book.id}`)
                 }}>
                   Edit
                   </button>
+                  
                 <button key={book.id} value={book.id} onClick={() => {
                   deleteBook(book.id)
                 }}>Delete</button>

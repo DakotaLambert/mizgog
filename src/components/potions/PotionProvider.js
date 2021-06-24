@@ -34,9 +34,20 @@ export const PotionProvider = (props) => {
         })
         .then(getPotions)
     }
+
+    const updatePotion = (potion) => {
+        return fetch(`http://localhost:8088/potions/${potion.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(potion)
+        })
+        .then(getPotions)
+    }
     return (
         <PotionContext.Provider value={{
-            potions, getPotions, addPotion, getPotionById, deletePotion
+            potions, getPotions, addPotion, getPotionById, deletePotion, updatePotion
         }}>
             {props.children}
         </PotionContext.Provider>

@@ -162,7 +162,7 @@ export const Register = (props) => {
       <form className="form--login" onSubmit={handleRegister}>
         <h1 className="mizgogPageHeader">Please Register</h1>
         <fieldset>
-          <label htmlFor="inputusername"> Create Username </label>
+          
           <input
             ref={username}
             type="username"

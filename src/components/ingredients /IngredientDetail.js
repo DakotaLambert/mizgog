@@ -13,11 +13,10 @@ export const IngredientDetail = ({ pIngredientId }) => {
     });
   }, []);
 
-  console.log(ingredient);
 
   return (
     <>
-      <div className="potionIngredientNames">{ingredient.name }</div>
+      <div className="potionIngredientDetailNames">{ingredient.name }</div>
     </>
   );
 };

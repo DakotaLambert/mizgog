@@ -11,6 +11,9 @@ export const PotionCreateForm = () => {
   const { addIngredient, addPotionIngredient } = useContext(IngredientContext);
   const history = useHistory();
 
+  const currentUser = parseInt(localStorage.getItem("wizard"))
+  const currentUsersBooks = books.filter(book => currentUser === book.userId)
+
   const [potion, setPotion] = useState({
     name: "",
     color: "",
@@ -100,12 +103,13 @@ export const PotionCreateForm = () => {
   };
 
   return (
-    <form>
+    <form className="potionFormContainer">
       <h2 className="potionCreateHead">Create-A-Potion</h2>
       <fieldset>
-        <div>
+        <div className="potionFormBox">
           <input
             type="text"
+            className="potionFormField"
             id="name"
             required
             autoFocus
@@ -115,19 +119,21 @@ export const PotionCreateForm = () => {
           />
         </div>
       </fieldset>
-      <fieldset>
+      <fieldset className="potionFormBox">
         <input
           type="text"
+          className="potionFormField"
           id="name"
           required
           placeholder="Ingredient #1"
           value={ingredient.name}
           onChange={handleIngredientInputChange}
         ></input>
-      </fieldset>
-      <fieldset>
+      </fieldset >
+      <fieldset className="potionFormBox">
         <input
           type="text"
+          className="potionFormField"
           id="name"
           required
           placeholder="Ingredient #2"
@@ -135,31 +141,35 @@ export const PotionCreateForm = () => {
           onChange={handleIngredientTwoInputChange}
         ></input>
       </fieldset>
-      <fieldset>
-        <div>
-          <input type="color" id="color" onChange={handleInputChange}></input>
+      <fieldset className="potionFormBox">
+        <div className="potionColorFieldDiv">
+          <input className="potionColorField" type="color" id="color" onChange={handleInputChange}></input>
         </div>
       </fieldset>
-      <fieldset>
+      <fieldset className="potionFormBox">
         <textarea
           type="text"
           id="description"
+          className="potionFormField"
           required
+          rows="4"
+          cols="10"
           placeholder="Potion Description"
           value={potion.description}
           onChange={handleInputChange}
         ></textarea>
       </fieldset>
-      <fieldset>
-        <div>
+      <fieldset className="potionFormBox">
+        <div className="potionColorFieldDiv">
           <select
             name="book"
+            className="potionColorField"
             id="bookId"
             value={potion.bookId}
             onChange={handleInputChange}
           >
             <option>Select a Book</option>
-            {books.map((book) => (
+            {currentUsersBooks.map((book) => (
               <option value={book.id} key={book.id}>
                 {book.name}
               </option>
@@ -167,6 +177,7 @@ export const PotionCreateForm = () => {
           </select>
         </div>
       </fieldset>
+      <div className="potionCreateButtonDiv">
       <button
         onClick={(event) => {
           event.preventDefault();
@@ -183,6 +194,7 @@ export const PotionCreateForm = () => {
       >
         Cancel
       </button>
+      </div>
     </form>
   );
 };
