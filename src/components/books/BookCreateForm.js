@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { BookContext } from "./BookProvider";
+import bookage from "../../Images/book1.png";
 
 export const BookCreateForm = () => {
   const { addBook } = useContext(BookContext);
@@ -37,27 +38,46 @@ export const BookCreateForm = () => {
   };
 
   return (
-    <form>
-      <fieldset>
-        <div>
-          <input
-            type="text"
-            id="name"
-            required
-            autoFocus
-            placeholder="Book Name"
-            value={book.name}
-            onChange={handleInputChange}
-          />
+    <>
+      <div className="bookCreatePageName">CREATE-A-BOOK</div>
+      <form className="bookFormContainer">
+        <fieldset>
+          <div className="bookFormBox">
+            <input
+              type="text"
+              id="name"
+              className="bookFormField"
+              required
+              autoFocus
+              placeholder="Book Name"
+              value={book.name}
+              onChange={handleInputChange}
+            />
+          </div>
+        </fieldset>
+
+        <div className="bookCreateImageDiv">
+          <img className="bookCreateImage" src={bookage} />
         </div>
-      </fieldset>
-      <button onClick={(event) => {
-        event.preventDefault()
-        handleAddBook()
-        }}>Save Book</button>
-        <button onClick={() => {
-          history.goBack([1])
-        }}>CANCEL</button>
-    </form>
+
+        <div className="bookCreateButtonDiv">
+          <button
+            onClick={(event) => {
+              event.preventDefault();
+              handleAddBook();
+            }}
+          >
+            Save Book
+          </button>
+          <button
+            onClick={() => {
+              history.goBack([1]);
+            }}
+          >
+            CANCEL
+          </button>
+        </div>
+      </form>
+    </>
   );
 };

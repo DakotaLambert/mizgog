@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom"
 import "./Login.css"
 import "../../components/Mizgog.css"
-
+import login from "./actualLoginBackground.png"
 
 export const Login = props => {
     const history = useHistory()
@@ -31,16 +31,22 @@ export const Login = props => {
     }
 
     return (
+
+        <>
+        <img className="cover" src={login}/>
+        <div />
         <main className="container--login">
             <dialog className="dialog dialog--auth" ref={existDialog}>
                 <div>User does not exist</div>
                 <button className="button--close" onClick={e => existDialog.current.close()}>Close</button>
             </dialog>
 
-            <section>
-                <form className="form--login" onSubmit={handleLogin}>
                     <h1 className="mizgogPageHeader">Mizgog's M'accoutrements</h1>
-                    <fieldset>
+            <section className="namsayin">
+                
+                <form className="form--login" onSubmit={handleLogin}>
+
+                    <fieldset className="loginField">
                         <input ref={username} type="username"
                             id="username"
                             className="form-control"
@@ -54,11 +60,12 @@ export const Login = props => {
                         </button>
                     </fieldset>
                 </form>
-            </section>
-            <section className="linkRegister">
                 <Link to="/register">No account? Register!</Link>
             </section>
+            <section className="linkRegister">
+            </section>
         </main>
+        </>
     )
 }
 

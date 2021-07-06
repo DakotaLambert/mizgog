@@ -29,14 +29,6 @@ export const PotionCreateForm = () => {
     name: "".toUpperCase(),
   });
 
-  // const [ potionIngredientOne ] = useState ({
-  //   potiondId: 0,
-  //   ingredientId: 0
-  // })
-  // const [ potionIngredientTwo ] = useState ({
-  //   potiondId: 0,
-  //   ingredientId: 0
-  // })
 
   useEffect(() => {
     getBooks();
@@ -143,8 +135,10 @@ export const PotionCreateForm = () => {
       </fieldset>
       <fieldset className="potionFormBox">
         <div className="potionColorFieldDiv">
+
           <input className="potionColorField" type="color" id="color" onChange={handleInputChange}></input>
         </div>
+        
       </fieldset>
       <fieldset className="potionFormBox">
         <textarea

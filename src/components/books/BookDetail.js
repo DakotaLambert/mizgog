@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import pot from "../../Images/potBlue.png";
 import "../potions/Potions.css";
 // import bookDetailBackground from "../../Images/pot.jpg"
+import botionPackground from "../../Images/actualBook.png"
+
 
 export const BookDetail = () => {
   const { getBookById } = useContext(BookContext);
@@ -32,6 +34,7 @@ export const BookDetail = () => {
     setLeft(leftNext);
     setRight(rightNext);
   };
+  
   const handleClickLeft = () => {
     const leftCopy = left;
     const rightCopy = right;
@@ -45,17 +48,21 @@ export const BookDetail = () => {
 
   return (
     <>
-      <style>{"body { background: `url(${})`"}</style>
+      {/* <style>{"body { background: `url(${})`"}</style> */}
+      
       <div className="potionPageHeader">POTIONS</div>
-      <div className="backgroundDetail">
-        <div className="potions">
-          <button
+
+      <div className="bookDetailsContainer">
+    
+      <button className="coolArrowLeft"
             onClick={() => {
               handleClickLeft();
             }}
           >
             ⇦
           </button>
+        <div className="potions">
+          
 
           {book.potions.slice(left, right).map((p) => (
             <div className="potion">
@@ -65,16 +72,19 @@ export const BookDetail = () => {
               </Link>
             </div>
           ))}
-          <button
+          
+
+        </div>
+      <button
             onClick={() => {
               handleClickRight();
             }}
-            className="coolArrow"
+            className="coolArrowRight"
           >
             ⇨
           </button>
+        {/* <img className="bookDetailBookImage" src={botionPackground}/> */}
         </div>
-      </div>
     </>
   );
 };

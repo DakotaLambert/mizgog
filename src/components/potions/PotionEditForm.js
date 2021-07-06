@@ -13,7 +13,6 @@ export const PotionEditForm = () => {
   const { updatePotion } = useContext(PotionContext);
   const { updateIngredient } = useContext(IngredientContext);
 
-
   const currentUser = parseInt(localStorage.getItem("wizard"))
   const currentUsersBooks = books.filter(book => currentUser === book.userId)
 
@@ -61,23 +60,6 @@ export const PotionEditForm = () => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   const ingred = potion.potionIngredients[0];
-  //   const ingredTwo = potion.potionIngredients[1]
-
-  //   if (ingred) {
-  //     getIngredientById(ingred.ingredientId)
-  //     .then((ingredientOne) => {
-  //       setIngredient(ingredientOne);
-  //     });
-  //   }
-  //   if (ingredTwo) {
-  //     getIngredientById(ingredTwo.ingredientId)
-  //     .then((ingredientTwo) => {
-  //       setIngredientTwo(ingredientTwo)
-  //     })
-  //   }
-  // }, [potion]);
 
   const handleUpdatePotion = () => {
     
@@ -88,10 +70,12 @@ export const PotionEditForm = () => {
       description: potion.description,
       bookId: parseInt(potion.bookId),
     };
+
     const updatedIngredient = {
       id: ingredient.id,
       name: ingredient.name,
     };
+
     const updatedIngredientTwo = {
       id: ingredientTwo.id,
       name: ingredientTwo.name,

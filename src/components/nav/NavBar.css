@@ -10,6 +10,21 @@
     list-style-type: none;
     text-align: center;
 }
+
+@keyframes navbarHover {
+    0%,  
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.navbar__item:hover {
+    animation: navbarHover 1s ease-in-out infinite;
+}
+
 .homeLink {
     background-image: url("/home/dakotalambert/workspace/mizgog/src/Images/weezard.png");
 }
