@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { BookContext } from "./BookProvider";
-
+import editBookage from "../../Images/book1.png"
 export const BookEditForm = () => {
   const { updateBook, getBookById } = useContext(BookContext);
 
@@ -48,36 +48,47 @@ export const BookEditForm = () => {
   };
 
   return (
-    <form>
-      <fieldset>
-        <div>
-          <input
-            type="text"
-            id="name"
-            required
-            autoFocus
-            placeholder="Book Name"
-            value={book.name}
-            onChange={handleInputChange}
-          />
+    <>
+      <div className="bookCreatePageName">EDIT-A-BOOK</div>
+
+      <form>
+        <fieldset>
+          <div className="bookFormBox">
+            <input
+              type="text"
+              id="name"
+              className="bookFormField"
+              required
+              autoFocus
+              placeholder="Book Name"
+              value={book.name}
+              onChange={handleInputChange}
+            />
+          </div>
+        </fieldset>
+
+        <div className="bookCreateImageDiv">
+          <img className="bookCreateImage" src={editBookage} />
         </div>
-      </fieldset>
-      <button
-        onClick={(event) => {
-          event.preventDefault();
-          handleUpdateBook();
-        }}
-      >
-        EDIT BOOK
-      </button>
-      <button
-        onClick={(event) => {
-          event.preventDefault();
-          history.goBack([1]);
-        }}
-      >
-        CANCEL
-      </button>
-    </form>
+        <div className="bookCreateButtonDiv">
+        <button
+          onClick={(event) => {
+            event.preventDefault();
+            handleUpdateBook();
+          }}
+        >
+          EDIT BOOK
+        </button>
+        <button
+          onClick={(event) => {
+            event.preventDefault();
+            history.goBack([1]);
+          }}
+        >
+          CANCEL
+        </button>
+        </div>
+      </form>
+    </>
   );
 };
