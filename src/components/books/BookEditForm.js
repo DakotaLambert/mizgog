@@ -1,3 +1,4 @@
+
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { BookContext } from "./BookProvider";
@@ -20,7 +21,7 @@ export const BookEditForm = () => {
         setBook(book);
       });
     }
-  }, []);
+  }, [bookId, getBookById]);
 
   const handleInputChange = (event) => {
     const newBook = { ...book };
@@ -68,7 +69,7 @@ export const BookEditForm = () => {
         </fieldset>
 
         <div className="bookCreateImageDiv">
-          <img className="bookCreateImage" src={editBookage} />
+          <img className="bookCreateImage" alt="A wizard book" src={editBookage} />
         </div>
         <div className="bookCreateButtonDiv">
         <button
