@@ -1,3 +1,4 @@
+
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BookContext } from "./BookProvider";
@@ -5,7 +6,7 @@ import { Link } from "react-router-dom";
 import pot from "../../Images/potBlue.png";
 import "../potions/Potions.css";
 // import bookDetailBackground from "../../Images/pot.jpg"
-import botionPackground from "../../Images/actualBook.png"
+// import botionPackground from "../../Images/actualBook.png"
 
 
 export const BookDetail = () => {
@@ -22,7 +23,7 @@ export const BookDetail = () => {
 
   useEffect(() => {
     getBookById(bookId).then(setBook);
-  }, [bookId]);
+  }, [bookId, getBookById]);
 
   const handleClickRight = () => {
     const leftCopy = left;
@@ -68,7 +69,7 @@ export const BookDetail = () => {
             <div className="potion">
               <div className="potionName">{p.name}</div>
               <Link to={`/Books/PotionDetail/${p.id}`}>
-                <img className="potionImage" src={pot} />
+                <img className="potionImage" alt="A potion" src={pot} />
               </Link>
             </div>
           ))}

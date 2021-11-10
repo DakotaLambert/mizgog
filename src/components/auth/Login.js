@@ -33,7 +33,7 @@ export const Login = props => {
     return (
 
         <>
-        <img className="cover" src={login}/>
+        <img className="cover" alt="The login background" src={login}/>
         <div />
         <main className="container--login">
             <dialog className="dialog dialog--auth" ref={existDialog}>
